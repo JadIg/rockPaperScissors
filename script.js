@@ -28,3 +28,12 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
+function game() {
+    for (let i = 0; i < 5; i++) {
+        const humanChoice = getHumanChoice();
+        const computerChoice = getComputerChoice();
+        const result = playRound(humanChoice, computerChoice);
+        console.log(result);
+        console.log(`Score - You: ${humanScore}, Computer: ${computerScore}`);
+    }
+}
