@@ -1,0 +1,198 @@
+/* ---------------- Base ---------------- */
+:root{
+  --bg:#f6f6f6;
+  --ink:#222;
+  --muted:#777;
+  --line:#2b2b2b;
+  --radius:14px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,"Helvetica Neue";
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:24px 12px 40px;
+}
+
+h1{
+  margin:0 0 10px;
+  font-weight:800;
+  letter-spacing:.3px;
+  font-size:clamp(20px, 4vw, 28px);
+}
+
+/* ---------------- Score ---------------- */
+.score{
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  align-items:center;
+  font-size:clamp(14px, 2.8vw, 18px);
+  margin-bottom:16px;
+  padding:0 8px;
+  flex-wrap:wrap;            /* prevent overflow on small phones */
+  text-align:center;
+}
+.score span{font-weight:800}
+
+/* ---------------- Arena ---------------- */
+/* Mobile-first: stack vertically: YOU -> VS -> COMPUTER */
+.arena{
+  width:100%;
+  max-width:980px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  margin:10px 0 22px;
+  padding:0 8px;
+}
+
+#Player-Choice,
+#Computer-Choice{
+  width: clamp(130px, 45vw, 220px);
+  height: clamp(130px, 45vw, 220px);
+  border:2.5px solid var(--line);
+  border-radius:999px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  box-shadow:0 1px 0 rgba(0,0,0,.06);
+}
+
+#Player-Choice p,
+#Computer-Choice p{
+  margin:0;
+  color:var(--muted);
+  font-weight:600;
+  font-size:clamp(12px, 3.2vw, 16px);
+  text-align:center;
+}
+
+/* ABOVE-circle tags (like the draft) */
+#Player-Choice::before,
+#Computer-Choice::before{
+  position:absolute;
+  top:-26px;
+  left:50%;
+  transform:translateX(-50%);
+  font-weight:800;
+  letter-spacing:.6px;
+  color:var(--ink);
+  font-size:clamp(12px, 3vw, 14px);
+  content:"";                /* set explicit content below */
+}
+
+.rps-icon {
+  font-size: 64px;   /* adjust as you like */
+  line-height: 1;
+}
+/* #Player-Choice::before{ content:"YOU"; }
+#Computer-Choice::before{ content:"COMPUTER"; } */
+
+/* VS chip */
+#vs{
+  font-weight:900;
+  font-size:clamp(16px, 5vw, 28px);
+  border:2.5px solid var(--line);
+  border-radius:999px;
+  padding:8px 14px;
+  line-height:1;
+  background:#fff;
+  box-shadow:0 1px 0 rgba(0,0,0,.06);
+}
+
+/* ---------------- Choices (buttons) ---------------- */
+.choices{
+  width:100%;
+  max-width:980px;
+  display:flex;
+  flex-direction:column;     /* stack on phones for big tap targets */
+  align-items:center;
+  gap:12px;
+  padding:0 10px;
+}
+
+.choice{
+  appearance:none;
+  border:2.5px solid var(--line);
+  background:#fff;
+  border-radius:var(--radius);
+  padding:14px 18px;
+  width: min(460px, 92%);    /* wide but not full-bleed */
+  min-height:72px;
+  display:flex;
+  flex-direction:row;        /* icon + label side-by-side on mobile */
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  cursor:pointer;
+  transition:transform .12s ease, background .12s ease, box-shadow .12s ease;
+  box-shadow:0 1px 0 rgba(0,0,0,.06);
+  text-align:center;
+}
+
+.choice .icon{font-size:28px; line-height:1}
+.choice .label{
+  font-weight:800;
+  letter-spacing:.6px;
+  font-size:16px;
+}
+
+.choice:hover{background:#f0f0f0; transform:translateY(-2px)}
+.choice:active{transform:translateY(0)}
+.choice:focus-visible{outline:3px solid #9dd1ff; outline-offset:3px}
+
+/* ---------------- Breakpoints ---------------- */
+/* Tablet: give buttons a row layout, enlarge arena a bit */
+@media (min-width: 600px){
+  .arena{
+    gap:20px;
+  }
+  #Player-Choice, #Computer-Choice{
+    width: clamp(160px, 28vw, 210px);
+    height: clamp(160px, 28vw, 210px);
+  }
+  .choices{
+    flex-direction:row;      /* row from tablet upwards */
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  .choice{
+    width:auto;
+    min-width:170px;
+    height:120px;
+    flex-direction:column;   /* icon above label from tablet up */
+    gap:8px;
+  }
+  .choice .icon{font-size:36px}
+}
+
+/* Desktop: arena becomes a single row (YOU — VS — COMPUTER) */
+@media (min-width: 900px){
+  .arena{
+    flex-direction:row;
+    gap:28px;
+    min-height:220px;
+  }
+  #vs{padding:10px 18px}
+  #Player-Choice, #Computer-Choice{
+    width:220px; height:220px;
+    border-width:3px;
+  }
+  .choice{
+    border-width:3px;
+    padding:18px 24px;
+  }
+}
