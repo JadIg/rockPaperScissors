@@ -1,3 +1,51 @@
+// ask the user if his name is yusur ahmed mohammed
+// if yes, then ask the user if in love with sajjad
+// if no, then hide the whole page and show full screen message "امشي ولي منا"
+// if yes, then hide the whole page and show full screen message "Then You Won!"
+
+let question = prompt("Is your name Yusur Ahmed Mohammed? (yes/no)", "yes");
+if (question && question.toLowerCase() === "yes") {
+  question = prompt("Are you in love with Sajjad? (yes/no)", "yes");
+  if (question && question.toLowerCase() === "yes") {
+    // Hide the whole page
+    document.body.style.display = 'none';
+    // Show full screen message
+    const message = document.createElement('div');
+    message.style.position = 'fixed';
+    message.style.top = '0';
+    message.style.left = '0';
+    message.style.width = '100%';
+    message.style.height = '100%';
+    message.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    message.style.color = 'white';
+    message.style.display = 'flex';
+    message.style.justifyContent = 'center';
+    message.style.alignItems = 'center';
+    message.style.fontSize = '3em';
+    message.textContent = 'Then You Won!';
+    document.body.appendChild(message);
+    } else {
+    // Hide the whole page
+    document.body.style.display = 'none';
+    // Show full screen message
+    const message = document.createElement('div');
+    message.style.position = 'fixed';
+    message.style.top = '0';
+    message.style.left = '0';
+    message.style.width = '100%';
+    message.style.height = '100%';
+    message.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    message.style.color = 'white';
+    message.style.display = 'flex';
+    message.style.justifyContent = 'center';
+    message.style.alignItems = 'center';
+    message.style.fontSize = '3em';
+    message.textContent = 'امشي ولي منا';
+    document.body.appendChild(message);
+  }
+} else {
+  console.log("Okay, no worries!");}
+
 // ----- Game logic (yours, slightly adapted) -----
 function getComputerChoice() {
   const choices = ['rock', 'paper', 'scissors'];
