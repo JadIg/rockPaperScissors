@@ -3,48 +3,37 @@
 // if no, then hide the whole page and show full screen message "امشي ولي منا"
 // if yes, then hide the whole page and show full screen message "Then You Won!"
 
-let question = prompt("Is your name Yusur Ahmed Mohammed? (yes/no)", "yes");
-if (question && question.toLowerCase() === "yes") {
-  question = prompt("Are you in love with Sajjad? (yes/no)", "yes");
-  if (question && question.toLowerCase() === "yes") {
-    // Hide the whole page
-    document.body.style.display = 'none';
-    // Show full screen message
-    const message = document.createElement('div');
-    message.style.position = 'fixed';
-    message.style.top = '0';
-    message.style.left = '0';
-    message.style.width = '100%';
-    message.style.height = '100%';
-    message.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-    message.style.color = 'white';
-    message.style.display = 'flex';
-    message.style.justifyContent = 'center';
-    message.style.alignItems = 'center';
-    message.style.fontSize = '3em';
-    message.textContent = 'Then You Won!';
-    document.body.appendChild(message);
-    } else {
-    // Hide the whole page
-    document.body.style.display = 'none';
-    // Show full screen message
-    const message = document.createElement('div');
-    message.style.position = 'fixed';
-    message.style.top = '0';
-    message.style.left = '0';
-    message.style.width = '100%';
-    message.style.height = '100%';
-    message.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-    message.style.color = 'white';
-    message.style.display = 'flex';
-    message.style.justifyContent = 'center';
-    message.style.alignItems = 'center';
-    message.style.fontSize = '3em';
-    message.textContent = 'امشي ولي منا';
-    document.body.appendChild(message);
+function showFullScreenMessage(text) {
+  const overlay = document.createElement('div');
+  Object.assign(overlay.style, {
+    position: 'fixed',
+    inset: '0',                    // top:0; right:0; bottom:0; left:0
+    backgroundColor: 'rgba(0,0,0,0.85)',
+    color: '#fff',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: '3em',
+    zIndex: '9999',
+    textAlign: 'center',
+    padding: '16px'
+  });
+  overlay.textContent = text;
+  document.body.appendChild(overlay);
+  document.body.style.overflow = 'hidden'; // optional: stop scrolling
+}
+
+let q = prompt("Is your name Yusur Ahmed Mohammed? (yes/no)");
+if (q && q.toLowerCase() === "yes") {
+  q = prompt("Are you in love with Sajjad? (yes/no)");
+  if (q && q.toLowerCase() === "yes") {
+    showFullScreenMessage('Then You Won!');
+  } else {
+    showFullScreenMessage('امشي ولي منا');
   }
 } else {
-  console.log("Okay, no worries!");}
+  console.log("Okay, no worries!");
+}
 
 // ----- Game logic (yours, slightly adapted) -----
 function getComputerChoice() {
